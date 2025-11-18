@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+.font-logo {
+  font-family: var(--font-logo);
+}
+
+.font-heading {
+  font-family: var(--font-heading);     
+}
+/* little cursive */
+
+.font-paragraph {
+  font-family: var(--font-paragraph);
+}
+
+.font-roboto {
+  font-family: var(--font-roboto);
+}
