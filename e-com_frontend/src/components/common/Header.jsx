@@ -1,11 +1,10 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { FiShoppingCart, FiUser, FiMenu, FiX } from "react-icons/fi";
+import { ShoppingCart, User, Search, Menu, X } from "lucide-react";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [categoriesOpen, setCategoriesOpen] = useState(false);
 
   return (
     <header className="w-full bg-white shadow-md sticky top-0 z-50">
@@ -17,91 +16,89 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-5 xl:gap-8">
-
-          {/* Categories Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setCategoriesOpen(!categoriesOpen)}
-              className="font-paragraph text-2xl font-semibold hover:text-red-600"
-            >
-              Categories ▾
-            </button>
-
-            {categoriesOpen && (
-              <div className="font-roboto absolute top-10 left-0 bg-white shadow-lg border rounded-lg w-40 py-2">
-                <Link href="/category/men" className="block px-4 py-2 hover:bg-gray-100">Men</Link>
-                <Link href="/category/women" className="block px-4 py-2 hover:bg-gray-100">Women</Link>
-                <Link href="/category/electronics" className="block px-4 py-2 hover:bg-gray-100">Electronics</Link>
-                <Link href="/category/shoes" className="block px-4 py-2 hover:bg-gray-100">Shoes</Link>
-              </div>
-            )}
-          </div>
-
-          {/* Search Bar */}
-          <input
-            type="text"
-            placeholder="Search for products..."
-            className="border border-gray-300 rounded-full px-4 py-2 w-64 focus:outline-none focus:ring focus:ring-red-200"
-          />
-
-          {/* User Login */}
-          <Link href="/login" className="font-paragraph flex text-xl font-semibold items-center gap-1 text-red-700 hover:text-red-500">
-            <FiUser className="text-xl" /> Login
+        <div className="xl:flex gap-15">
+          <nav className="hidden md:flex items-center space-x-6">
+          <Link href="/" className="font-paragraph text-xl hover:text-red-600 font-medium">
+            Home
           </Link>
-
-          {/* Cart */}
-          <Link href="/cart" className="relative text-gray-700 hover:text-red-600">
-            <FiShoppingCart className="text-2xl" />
-            <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex justify-center items-center rounded-full">
-              0
-            </span>
+          <Link href="/new-arrivals" className="font-paragraph text-xl hover:text-red-600 font-medium">
+            New Arrivals
+          </Link>
+          <Link href="/shop" className="font-paragraph text-xl hover:text-red-600 font-medium">
+            Shop
+          </Link>
+          <Link href="/contact" className="font-paragraph text-xl hover:text-red-600 font-medium">
+            Contact
+          </Link>
+          <Link href="/aboutus" className="font-paragraph text-xl hover:text-red-600 font-medium">
+            About Us
           </Link>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button className="md:hidden text-2xl" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <FiX /> : <FiMenu />}
-        </button>
+        {/* Search Bar (Desktop) */}
+        <div className="hidden md:flex items-center xl:w-100 bg-gray-100 rounded-full px-3 py-2 mt-2">
+          <Search className="text-gray-500 mr-2" size={18} />
+          <input
+            type="text"
+            placeholder="Search for products..."
+            className="bg-transparent outline-none w-full text-sm"
+          />
+        </div>
+        </div>
+        
 
+        {/* Right Icons */}
+        <div className="flex items-center space-x-5">
+          <Link href="/account" className="text-gray-700 hover:text-red-600">
+            <User size={22} />
+          </Link>
+          <Link href="/cart" className="relative text-gray-700 hover:text-red-600">
+            <ShoppingCart size={22} />
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+              3
+            </span>
+          </Link>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            className="md:hidden hover:text-red-600"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white shadow-lg border-t py-4 space-y=4 px-4">
+        <div className="md:hidden bg-white border-t border-gray-100 px-4 pb-4">
+          <nav className="flex flex-col space-y-2 mt-3">
+            <Link href="/" className="font-paragraph font-semibold hover:text-red-600 text-[18px]">
+              Home
+            </Link>
+            <Link href="/new-arrivals" className="font-paragraph font-semibold hover:text-red-600 text-[18px]">
+              New Arrivals
+            </Link>
+            <Link href="/shop" className="font-paragraph font-semibold hover:text-red-600 text-[18px]">
+              Shop
+            </Link>
+            <Link href="/contact" className="font-paragraph font-semibold hover:text-red-600 text-[18px]">
+              Contact
+            </Link>
+            <Link href="/aboutus" className="font-paragraph font-semibold hover:text-red-600 text-[18px]">
+              About Us
+            </Link>
+          </nav>
 
-          {/* Categories */}
-          <button
-            onClick={() => setCategoriesOpen(!categoriesOpen)}
-            className="font-paragraph text-xl font-semibold hover:text-red-600 block w-full text-left text-red-800 py-2"
-          >
-            Categories ▾
-          </button>
-
-          {categoriesOpen && (
-            <div className="bg-gray-50 rounded-lg py-2 mb-3">
-              <Link href="/category/men" className="block px-4 py-2 hover:bg-gray-100">Men</Link>
-              <Link href="/category/women" className="block px-4 py-2 hover:bg-gray-100">Women</Link>
-              <Link href="/category/electronics" className="block px-4 py-2 hover:bg-gray-100">Electronics</Link>
-              <Link href="/category/shoes" className="block px-4 py-2 hover:bg-gray-100">Shoes</Link>
-            </div>
-          )}
-
-          {/* Search */}
-          <input
-            type="text"
-            placeholder="Search..."
-            className="border border-gray-300 rounded-lg px-4 py-2 w-full"
-          />
-
-          {/* Login */}
-          <Link href="/login" className="font-paragraph text-xl font-semibold block py-2 text-red-700">Login</Link>
-
-          {/* Cart */}
-          <Link href="/cart" className="flex items-center gap-2 py-2 text-gray-700">
-            <FiShoppingCart className="text-xl" /> Cart
-          </Link>
-
+          {/* Mobile Search */}
+          <div className="mt-3 flex items-center bg-gray-100 rounded-full px-3 py-2">
+            <Search className="mr-2" size={18} />
+            <input
+              type="text"
+              placeholder="Search for products..."
+              className="bg-transparent outline-none w-full text-sm"
+            />
+          </div>
         </div>
       )}
     </header>
